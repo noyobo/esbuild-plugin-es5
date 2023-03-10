@@ -3,11 +3,12 @@
  * convert code to es5 use @swc/core
  */
 
-import { Plugin } from 'esbuild';
-import { transformFile, Options as SwcOptions } from '@swc/core';
+import { OnLoadResult, Plugin } from 'esbuild';
+import { transformFile, Options as SWCOptions } from '@swc/core';
 import deepmerge from 'deepmerge';
+import { convertError } from './convertError';
 
-export default function es5Plugin(options?: { filter?: RegExp; swc?: SwcOptions }) {
+export default function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
   return {
     name: 'es5',
     setup(build) {
@@ -15,12 +16,20 @@ export default function es5Plugin(options?: { filter?: RegExp; swc?: SwcOptions 
 
       const enableSourcemap = !!buildOptions.sourcemap;
 
-      build.onLoad({ filter: options?.filter || /\.(js|ts|jsx|tsx)$/ }, async args => {
+      build.onLoad({ filter: options?.filter || /\.([tj]sx?)$/ }, args => {
         const isTs = args.path.endsWith('.ts') || args.path.endsWith('.tsx');
         const isReact = args.path.endsWith('.jsx') || args.path.endsWith('.tsx');
 
-        const transformOptions: SwcOptions = {
-          jsc: { parser: { syntax: isTs ? 'typescript' : 'ecmascript', tsx: isReact }, target: 'es5' },
+        const transformOptions: SWCOptions = {
+          jsc: {
+            parser: { syntax: isTs ? 'typescript' : 'ecmascript', tsx: isReact },
+            target: 'es5',
+            /**
+             * Use external helpers to avoid duplicate helpers in the output.
+             * esbuild muse has alias `@swc/helpers`
+             */
+            externalHelpers: true,
+          },
           module: { type: 'es6' },
           /**
            * Generate inline source maps to enable esbuild to properly handle sourcemaps.
@@ -33,8 +42,15 @@ export default function es5Plugin(options?: { filter?: RegExp; swc?: SwcOptions 
           deepmerge(transformOptions, options?.swc);
         }
 
-        const { code } = await transformFile(args.path, transformOptions);
-        return { contents: code, loader: 'js' };
+        return new Promise<OnLoadResult>(resolve => {
+          transformFile(args.path, transformOptions)
+            .then(({ code }) => {
+              resolve({ contents: code, loader: 'js' });
+            })
+            .catch(error => {
+              resolve({ pluginName: 'es5', errors: [convertError(error)] });
+            });
+        });
       });
     },
   } as Plugin;

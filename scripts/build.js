@@ -11,7 +11,6 @@ const { outfile, minify = false, platform, bundle = false, globalName, sourcemap
 
 const resolve = p => path.resolve(cwd, p);
 
-const t = Date.now();
 esbuild
   .build({
     entryPoints: args._.map(f => resolve(f)),
@@ -19,11 +18,25 @@ esbuild
     minify: minify,
     outfile: resolve(outfile),
     platform: platform || 'browser',
-    plugins: [es5Plugin()],
+    plugins: [
+      es5Plugin(),
+      {
+        name: 'duration',
+        setup(build) {
+          let t;
+          build.onStart(() => {
+            t = Date.now();
+          });
+          build.onEnd(() => {
+            console.log('⚡ Done in', Date.now() - t, 'ms');
+          });
+        },
+      },
+    ],
     target: ['es5'],
     globalName: globalName,
     sourcemap: sourcemap,
   })
   .then(() => {
-    console.log('Build complete', Date.now() - t, 'ms');
+    console.log('Build finished');
   });
