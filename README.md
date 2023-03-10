@@ -8,7 +8,6 @@ Use the @swc/core transform to convert to ES5 for the esbuild plugin.
 [![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
-[![Semantic Release][semantic-release-img]][semantic-release-url]
 
 ## Why?
 
@@ -68,7 +67,5 @@ SWC Options : https://swc.rs/docs/configuration/compilation
 [issues-url]:https://github.com/noyobo/esbuild-plugin-es5/issues
 [codecov-img]:https://codecov.io/gh/noyobo/esbuild-plugin-es5/branch/main/graph/badge.svg
 [codecov-url]:https://codecov.io/gh/noyobo/esbuild-plugin-es5
-[semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]:https://github.com/semantic-release/semantic-release
 [commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]:http://commitizen.github.io/cz-cli/
