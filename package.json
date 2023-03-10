@@ -1,6 +1,6 @@
 {
   "name": "esbuild-plugin-es5",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Use the @swc/core transform to convert to ES5 for the esbuild plugin.",
   "keywords": [
     "boilerplate",
