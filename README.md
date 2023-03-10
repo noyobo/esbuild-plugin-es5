@@ -9,11 +9,18 @@ Use the @swc/core transform to convert to ES5 for the esbuild plugin.
 [![Code Coverage][codecov-img]][codecov-url]
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 
+## Features
+
+- ✅ Support Tree Shaking
+- ✅ Support Code sharing (eg: async generator function)
+- ✅ Support Sourcemap
+- ✅ Support custom swc options
+- ✅ Support custom filter
+
 ## Why?
 
-esbuild does not support exporting in ES5 mode, so when our code needs to run on legacy devices, it has to be converted to ES5. This plugin uses @swc/core to convert non-ES5 syntax to ES5 before the build process, preserving the ES module format, allowing esbuild to maintain its tree shaking ability while also supporting source map generation.
-
-> related issues: https://github.com/evanw/esbuild/issues/297
+esbuild does not support exporting in ES5 mode, so when our code needs to run on older devices, 
+it must be converted to ES5. This plugin uses @swc/core to convert non-ES5 syntax to ES5 before bundling.
 
 
 ## Performance impact
@@ -30,28 +37,34 @@ The swc conversion is introduced, the conversion steps are added, and the constr
 ## Install
 
 ```bash
-npm install esbuild-build-es5 -D
+npm install esbuild-plugin-es5 -D
 ```
 
 ## Usage
 
 ```ts
-import es5Plugin from 'esbuild-build-es5';
+import es5Plugin from 'esbuild-plugin-es5';
+import path from 'path';
 
 await esbuild.build({
   entryPoints: ['src/index.ts'],
   bundle: true,
   outfile: 'dist/index.js',
-  plugins: [es5Plugin()],
-  target: ['es5'], // 🚀
+  plugins: [es5Plugin()], // # 1. Use esbuild-plugin-es5
+  target: ['es5'], // # 2. Set the target to es5
+  alias: {
+    // # 3. Set the alias to @swc/helpers
+    '@swc/helpers': path.dirname(require.resolve('@swc/helpers/package.json')),
+  }
 });
 ```
 
+> For a faster development experience, you can only use it in production mode.
 
 ## Options
 
 ```ts
-const es5Plugin= (options: { filter?: RegExp; swc?: SwcOptions }) => Es5Plugin
+const es5Plugin= (options: { filter?: RegExp; swc?: SWCOptions }) => Es5Plugin
 ```
 
 SWC Options : https://swc.rs/docs/configuration/compilation

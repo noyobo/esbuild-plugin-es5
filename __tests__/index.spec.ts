@@ -1,4 +1,4 @@
-import esbuild from 'esbuild';
+import esbuild, { BuildResult } from 'esbuild';
 import * as path from 'path';
 import * as fse from 'fs-extra';
 
@@ -41,21 +41,30 @@ const createBuild = async (files: string[]) => {
   });
 
   await emitHtml(files);
-  const result = await esbuild.build({
-    entryPoints: files,
-    plugins: [es5Plugin()],
-    write: false,
-    bundle: true,
-    sourcemap: 'linked',
-    outbase: __dirname,
-    outdir: 'dist',
-    target: ['es5'],
-    minify: true,
-  });
+  const result = await esbuild
+    .build({
+      entryPoints: files,
+      plugins: [es5Plugin()],
+      write: false,
+      bundle: true,
+      sourcemap: 'linked',
+      outbase: __dirname,
+      outdir: 'dist',
+      target: ['es5'],
+      minify: true,
+      alias: {
+        '@swc/helpers': path.dirname(require.resolve('@swc/helpers/package.json')),
+      },
+    })
+    .catch((error: BuildResult) => {
+      expect(error.errors).toMatchSnapshot();
+    });
 
-  for (const file of result.outputFiles) {
-    if (file.path.endsWith('.js')) {
-      expect(file.text).toMatchSnapshot();
+  if (result) {
+    for (const file of result.outputFiles) {
+      if (file.path.endsWith('.js')) {
+        expect(file.text).toMatchSnapshot();
+      }
       writeFileSync(file.path, file.text);
     }
   }
@@ -67,8 +76,16 @@ describe('index', () => {
       await createBuild(['./fixtures/basic/index.ts']);
     });
 
-    it('should support react', function () {
-      return createBuild(['./fixtures/react/index.tsx']);
+    it('react', async () => {
+      await createBuild(['./fixtures/react/index.tsx']);
+    });
+
+    it('async', async () => {
+      await createBuild(['./fixtures/async/index.ts']);
+    });
+
+    it('error', async () => {
+      await createBuild(['./fixtures/error/index.ts']);
     });
   });
 });
