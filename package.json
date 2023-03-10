@@ -13,6 +13,10 @@
     "semantic-release",
     "codecov"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "homepage": "https://github.com/noyobo/esbuild-plugin-es5#readme",
   "bugs": {
     "url": "https://github.com/noyobo/esbuild-plugin-es5/issues"
