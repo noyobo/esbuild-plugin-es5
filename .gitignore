@@ -117,3 +117,11 @@ dist
 
 # Compiled code
 lib/
+esm/
+
+.idea/
+
+# test
+
+github/
+demo/

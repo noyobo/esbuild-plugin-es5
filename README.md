@@ -1,59 +1,6 @@
-# typescript-npm-package-template
+# esbuild-build-es5
 
-> Template to kickstart creating a Node.js module using TypeScript and VSCode
-
-Inspired by [node-module-boilerplate](https://github.com/sindresorhus/node-module-boilerplate)
-
-## Features
-
-- [Semantic Release](https://github.com/semantic-release/semantic-release)
-- [Issue Templates](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/ISSUE_TEMPLATE)
-- [GitHub Actions](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/workflows)
-- [Codecov](https://about.codecov.io/)
-- [VSCode Launch Configurations](https://github.com/ryansonshine/typescript-npm-package-template/blob/main/.vscode/launch.json)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Husky](https://github.com/typicode/husky)
-- [Lint Staged](https://github.com/okonet/lint-staged)
-- [Commitizen](https://github.com/search?q=commitizen)
-- [Jest](https://jestjs.io/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-
-## Getting started
-
-### Set up your repository
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```bash
-curl -fsSL https://github.com/ryansonshine/typescript-npm-package-template/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
-Replace `FULL_NAME`, `GITHUB_USER`, and `REPO_NAME` in the script below with your own details to personalize your new package:
-
-```bash
-FULL_NAME="John Smith"
-GITHUB_USER="johnsmith"
-REPO_NAME="my-cool-package"
-sed -i.mybak "s/\([\/\"]\)(ryansonshine)/$GITHUB_USER/g; s/typescript-npm-package-template\|my-package-name/$REPO_NAME/g; s/Ryan Sonshine/$FULL_NAME/g" package.json package-lock.json README.md
-rm *.mybak
-```
-
-### Add NPM Token
-
-Add your npm token to your GitHub repository secrets as `NPM_TOKEN`.
-
-### Add Codecov integration
-
-Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
-
-**Remove everything from here and above**
-
----
-
-# my-package-name
+Use the @swc/core transform to convert to ES5 for the esbuild plugin.
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
@@ -63,54 +10,64 @@ Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module
+## Why?
+
+esbuild does not support exporting in ES5 mode, so when our code needs to run on legacy devices, it has to be converted to ES5. This plugin uses @swc/core to convert non-ES5 syntax to ES5 before the build process, preserving the ES module format, allowing esbuild to maintain its tree shaking ability while also supporting source map generation.
+
+> related issues: https://github.com/evanw/esbuild/issues/297
+
+
+## Performance impact
+
+The swc conversion is introduced, the conversion steps are added, and the construction time is increased to a certain extent.
+
+| Project  | esbuild | esbuild + es5Plugin |
+|----------|---------| --- |
+| three.js | 50ms    | 180ms |
+
+> For a test example you can clone the current project and run `make demo-three-esbuild` and `make demo-three-esbuild-es5` for comparison.
+
 
 ## Install
 
 ```bash
-npm install my-package-name
+npm install esbuild-build-es5 -D
 ```
 
 ## Usage
 
 ```ts
-import { myPackage } from 'my-package-name';
+import es5Plugin from 'esbuild-build-es5';
 
-myPackage('hello');
-//=> 'hello from my package'
+await esbuild.build({
+  entryPoints: ['src/index.ts'],
+  bundle: true,
+  outfile: 'dist/index.js',
+  plugins: [es5Plugin()],
+  target: ['es5'], // 🚀
+});
 ```
 
-## API
 
-### myPackage(input, options?)
+## Options
 
-#### input
+```ts
+const es5Plugin= (options: { filter?: RegExp; swc?: SwcOptions }) => Es5Plugin
+```
 
-Type: `string`
+SWC Options : https://swc.rs/docs/configuration/compilation
 
-Lorem ipsum.
 
-#### options
-
-Type: `object`
-
-##### postfix
-
-Type: `string`
-Default: `rainbows`
-
-Lorem ipsum.
-
-[build-img]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]:https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]:https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]:https://github.com/ryansonshine/typescript-npm-package-template/issues
-[codecov-img]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template
+[build-img]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/release.yml/badge.svg
+[build-url]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/release.yml
+[downloads-img]:https://img.shields.io/npm/dt/esbuild-plugin-es5
+[downloads-url]:https://www.npmtrends.com/esbuild-plugin-es5
+[npm-img]:https://img.shields.io/npm/v/esbuild-plugin-es5
+[npm-url]:https://www.npmjs.com/package/esbuild-plugin-es5
+[issues-img]:https://img.shields.io/github/issues/noyobo/esbuild-plugin-es5
+[issues-url]:https://github.com/noyobo/esbuild-plugin-es5/issues
+[codecov-img]:https://codecov.io/gh/noyobo/esbuild-plugin-es5/branch/main/graph/badge.svg
+[codecov-url]:https://codecov.io/gh/noyobo/esbuild-plugin-es5
 [semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]:https://github.com/semantic-release/semantic-release
 [commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg

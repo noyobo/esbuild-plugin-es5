@@ -6,11 +6,28 @@ on:
     branches:
       - main
 jobs:
-  release:
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-    uses: ryansonshine/ryansonshine/.github/workflows/release.yml@main
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
+      - name: Bump Version
+        uses: qzb/standard-version-action@v1.0.5
+
+      - name: Npm publish
+        run: |
+          npm whoami
+          npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ github.token }}
+          branch: ${{ github.ref }}
