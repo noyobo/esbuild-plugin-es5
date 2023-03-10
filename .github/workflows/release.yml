@@ -21,7 +21,9 @@ jobs:
       - name: Update version and generate release notes
         run: npx standard-version
       - name: Publish to npm
-        run: pnpm publish --access public
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
+          pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Push changes
