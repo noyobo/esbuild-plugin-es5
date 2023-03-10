@@ -10,24 +10,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Configure committer
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-
       - name: Bump Version
         uses: qzb/standard-version-action@v1.0.5
-
       - name: Npm publish
         run: |
           npm whoami
           npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ github.token }}
           branch: ${{ github.ref }}
+      - name: cnpm sync
+        run: |
+          export PKG=$(cat package.json | grep "name" | cut -d'"' -f 4)
+          printf "\n"
+          echo "package name: $PKG"
+          curl -X PUT  https://registry-direct.npmmirror.com/$PKG/sync\?sync_upstream\=true
+          sleep 5
+          printf "\n"
+          echo "https://registry.npmmirror.com/$PKG"
+          printf "\n"
+          echo "https://npmmirror.com/$PKG"
