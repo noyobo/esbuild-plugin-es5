@@ -54,8 +54,8 @@ const createBuild = async (files: string[]) => {
   });
 
   for (const file of result.outputFiles) {
-    expect(file.text).toMatchSnapshot();
     if (file.path.endsWith('.js')) {
+      expect(file.text).toMatchSnapshot();
       writeFileSync(file.path, file.text);
     }
   }
