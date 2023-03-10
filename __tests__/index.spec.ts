@@ -46,7 +46,7 @@ const createBuild = async (files: string[]) => {
     plugins: [es5Plugin()],
     write: false,
     bundle: true,
-    sourcemap: 'inline',
+    sourcemap: 'linked',
     outbase: __dirname,
     outdir: 'dist',
     target: ['es5'],
@@ -54,7 +54,7 @@ const createBuild = async (files: string[]) => {
   });
 
   for (const file of result.outputFiles) {
-    expect(file.text).toMatchSnapshot(file.path);
+    expect(file.text).toMatchSnapshot();
     writeFileSync(file.path, file.text);
   }
 };

@@ -50,5 +50,5 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Test project
+      - name: Test sucrase
         run: make test-sucrase
