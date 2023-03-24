@@ -8,7 +8,7 @@ import { transformFile, Options as SWCOptions } from '@swc/core';
 import deepmerge from 'deepmerge';
 import { convertError } from './convertError';
 
-export default function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
+export function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
   return {
     name: 'es5',
     setup(build) {
