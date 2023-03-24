@@ -43,7 +43,7 @@ npm install esbuild-plugin-es5 -D
 ## Usage
 
 ```ts
-import es5Plugin from 'esbuild-plugin-es5';
+import { es5Plugin } from 'esbuild-plugin-es5';
 import path from 'path';
 
 await esbuild.build({

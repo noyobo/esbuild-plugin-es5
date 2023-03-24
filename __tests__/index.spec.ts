@@ -2,7 +2,7 @@ import esbuild, { BuildResult } from 'esbuild';
 import * as path from 'path';
 import * as fse from 'fs-extra';
 
-import es5Plugin from '../src/index';
+import { es5Plugin } from '../src/index';
 
 const writeFileSync = (file: string, data: string) => {
   fse.ensureFileSync(file);
