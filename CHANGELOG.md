@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.0.0 (2023-03-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove default export
+
+### Features
+
+* use named export `es5Plugin` ([3c20d1f](https://github.com/noyobo/esbuild-plugin-es5/commit/3c20d1f58680a276d42935673e6ddde7e55132f3))
+
 ## 1.2.0 (2023-03-10)
 
 
