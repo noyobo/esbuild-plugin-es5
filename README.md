@@ -37,7 +37,7 @@ The swc conversion is introduced, the conversion steps are added, and the constr
 ## Install
 
 ```bash
-npm install esbuild-plugin-es5 -D
+npm install esbuild-plugin-es5 @swc/helpers -D
 ```
 
 ## Usage
