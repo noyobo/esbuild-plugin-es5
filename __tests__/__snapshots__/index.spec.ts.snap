@@ -51,17 +51,21 @@ Caused by:
 
 exports[`index esbuild-plugin-es5 react 1`] = `
 ""use strict";
-import React from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _interopRequireDefault = require("@swc/helpers/lib/_interop_require_default.js").default;
+var _react = /* @__PURE__ */ _interopRequireDefault(require("react"));
+var _client = require("react-dom/client");
+require("./index.css");
 var App = function() {
   console.warn("Hello World");
-  return /* @__PURE__ */ React.createElement("div", null, "Hello World");
+  return /* @__PURE__ */ _react.default.createElement("div", null, "Hello World");
 };
 var div = document.createElement("div");
 document.body.appendChild(div);
-var root = createRoot(div);
-root.render(/* @__PURE__ */ React.createElement(App, null));
+var root = (0, _client.createRoot)(div);
+root.render(/* @__PURE__ */ _react.default.createElement(App, null));
 //# sourceMappingURL=index.js.map
 "
 `;
