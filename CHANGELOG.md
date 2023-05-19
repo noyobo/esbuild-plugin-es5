@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.0.1 (2023-05-19)
+
+
+### Bug Fixes
+
+* swc options not work ([#3](https://github.com/noyobo/esbuild-plugin-es5/issues/3)) ([bc40d80](https://github.com/noyobo/esbuild-plugin-es5/commit/bc40d80e8bbe978cd7c6072fc8cc63bdad2e649d))
+
 ## 2.0.0 (2023-03-24)
 
 
