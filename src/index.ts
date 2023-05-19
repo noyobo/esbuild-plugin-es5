@@ -16,7 +16,7 @@ export function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
 
       const enableSourcemap = !!buildOptions.sourcemap;
 
-      build.onLoad({ filter: options?.filter || /\.([tj]sx?)$/ }, args => {
+      build.onLoad({ filter: options?.filter || /\.([tj]sx?|mjs)$/ }, args => {
         const isTs = args.path.endsWith('.ts') || args.path.endsWith('.tsx');
         const isReact = args.path.endsWith('.jsx') || args.path.endsWith('.tsx');
 

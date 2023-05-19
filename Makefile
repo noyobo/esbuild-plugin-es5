@@ -4,7 +4,7 @@
 github/sucrase:
 	mkdir -p github/sucrase
 	cd github/sucrase && git init && git remote add origin https://github.com/alangpierce/sucrase.git
-	cd github/sucrase && git fetch --depth 1 origin a4a596e5cdd57362f309ae50cc32a235d7817d34 && git checkout FETCH_HEAD
+	cd github/sucrase && git fetch --depth 1 origin 7284b3733aa114b3f4f5371e36ff5a4704ec860e && git checkout FETCH_HEAD
 
 demo/sucrase: | github/sucrase
 	mkdir -p demo
