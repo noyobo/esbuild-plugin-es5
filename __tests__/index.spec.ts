@@ -58,7 +58,8 @@ const createBuild = async (files: string[], swc?: SWCOptions) => {
       // },
     })
     .catch((error: BuildResult) => {
-      expect(error.errors).toMatchSnapshot();
+      expect(error.errors.length).toBe(1);
+      expect(error.errors[0].text).toContain("Expected ',', got ';'");
     });
 
   if (result) {
