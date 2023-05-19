@@ -9,14 +9,13 @@ github/sucrase:
 demo/sucrase: | github/sucrase
 	mkdir -p demo
 	cp -r github/sucrase/ demo/sucrase
-	cd demo/sucrase && npm i
+	cd demo/sucrase && npm i && npm i @swc/helpers -D
 	cd demo/sucrase && find test -name '*.ts' | sed 's/\(.*\)\.ts/import ".\/\1"/g' > all-tests.ts
 	echo '{}' > demo/sucrase/tsconfig.json # Sucrase tests fail if tsconfig.json is respected due to useDefineForClassFields
 
 test-sucrase:  demo/sucrase
 	cd demo/sucrase && node ../../scripts/build.js all-tests.ts --bundle --platform=node --outfile=out.js && npx mocha out.js
 	cd demo/sucrase && node ../../scripts/build.js all-tests.ts --bundle --platform=node --minify --outfile=out.js && npx mocha out.js
-
 
 
 ################################################################################
