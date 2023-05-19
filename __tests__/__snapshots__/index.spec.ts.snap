@@ -2,7 +2,7 @@
 
 exports[`index esbuild-plugin-es5 async 1`] = `
 ""use strict";
-import _sliced_to_array from "@swc/helpers/src/_sliced_to_array.mjs";
+import { _ as _sliced_to_array } from "@swc/helpers/_/_sliced_to_array";
 import { foo } from "./foo";
 import { bar } from "./bar";
 Promise.all([
@@ -30,8 +30,8 @@ exports[`index esbuild-plugin-es5 react 1`] = `
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _interopRequireDefault = require("@swc/helpers/lib/_interop_require_default.js").default;
-var _react = /* @__PURE__ */ _interopRequireDefault(require("react"));
+var _interop_require_default = require("@swc/helpers/_/_interop_require_default");
+var _react = /* @__PURE__ */ _interop_require_default._(require("react"));
 var _client = require("react-dom/client");
 require("./index.css");
 var App = function() {
