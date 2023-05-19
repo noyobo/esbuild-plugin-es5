@@ -16,11 +16,11 @@ export function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
 
       const enableSourcemap = !!buildOptions.sourcemap;
 
-      build.onLoad({ filter: options?.filter || /\.([tj]sx?)$/ }, args => {
+      build.onLoad({ filter: options?.filter || /\.([tj]sx?|mjs)$/ }, args => {
         const isTs = args.path.endsWith('.ts') || args.path.endsWith('.tsx');
         const isReact = args.path.endsWith('.jsx') || args.path.endsWith('.tsx');
 
-        const transformOptions: SWCOptions = {
+        let transformOptions: SWCOptions = {
           jsc: {
             parser: { syntax: isTs ? 'typescript' : 'ecmascript', tsx: isReact },
             target: 'es5',
@@ -39,7 +39,7 @@ export function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
         };
 
         if (options?.swc) {
-          deepmerge(transformOptions, options?.swc);
+          transformOptions = deepmerge(transformOptions, options?.swc);
         }
 
         return new Promise<OnLoadResult>(resolve => {

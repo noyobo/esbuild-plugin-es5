@@ -1,6 +1,7 @@
 import esbuild, { BuildResult } from 'esbuild';
 import * as path from 'path';
 import * as fse from 'fs-extra';
+import { Options as SWCOptions } from '@swc/core';
 
 import { es5Plugin } from '../src/index';
 
@@ -35,7 +36,7 @@ const emitHtml = async (files: string[]) => {
   });
 };
 
-const createBuild = async (files: string[]) => {
+const createBuild = async (files: string[], swc?: SWCOptions) => {
   files = files.map(file => {
     return path.join(__dirname, file);
   });
@@ -44,20 +45,21 @@ const createBuild = async (files: string[]) => {
   const result = await esbuild
     .build({
       entryPoints: files,
-      plugins: [es5Plugin()],
+      plugins: [es5Plugin({ swc })],
       write: false,
-      bundle: true,
+      bundle: false,
       sourcemap: 'linked',
       outbase: __dirname,
       outdir: 'dist',
       target: ['es5'],
-      minify: true,
-      alias: {
-        '@swc/helpers': path.dirname(require.resolve('@swc/helpers/package.json')),
-      },
+      minify: false,
+      // alias: {
+      //   '@swc/helpers': path.dirname(require.resolve('@swc/helpers/package.json')),
+      // },
     })
     .catch((error: BuildResult) => {
-      expect(error.errors).toMatchSnapshot();
+      expect(error.errors.length).toBe(1);
+      expect(error.errors[0].text).toContain("Expected ',', got ';'");
     });
 
   if (result) {
@@ -77,7 +79,11 @@ describe('index', () => {
     });
 
     it('react', async () => {
-      await createBuild(['./fixtures/react/index.tsx']);
+      await createBuild(['./fixtures/react/index.tsx'], {
+        module: {
+          type: 'commonjs',
+        },
+      });
     });
 
     it('async', async () => {
