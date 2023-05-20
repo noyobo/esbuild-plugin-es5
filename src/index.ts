@@ -35,6 +35,7 @@ export function es5Plugin(options?: { filter?: RegExp; swc?: SWCOptions }) {
            * Generate inline source maps to enable esbuild to properly handle sourcemaps.
            */
           sourceMaps: enableSourcemap ? 'inline' : false,
+          sourceFileName: args.path,
           isModule: true,
         };
 
