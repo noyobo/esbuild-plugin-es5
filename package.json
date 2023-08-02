@@ -53,7 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "conventional-changelog-conventionalcommits": "^5.0.0",
-    "esbuild": "^0.17.19",
+    "esbuild": "^0.18.0",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-node": "^11.1.0",
@@ -71,7 +71,7 @@
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "esbuild": "^0.17.11"
+    "esbuild": "^0.18.0"
   },
   "engines": {
     "node": ">=12.0"
