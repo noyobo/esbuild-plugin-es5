@@ -20,6 +20,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build package
         run: pnpm build
+      - name: Test project
+        run: pnpm test
       - name: Update version and generate release notes
         run: npx standard-version
       - name: Publish to npm
