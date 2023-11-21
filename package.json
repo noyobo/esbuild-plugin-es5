@@ -47,15 +47,15 @@
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.5.4",
     "@types/minimist": "^1.2.2",
-    "@types/node": "^20.5.7",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "conventional-changelog-conventionalcommits": "^7.0.1",
-    "esbuild": "^0.18.20",
-    "eslint": "^8.48.0",
-    "eslint-config-prettier": "^9.0.0",
+    "@types/node": "^20.2.1",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
+    "esbuild": "^0.19.0",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
     "fs-extra": "^11.1.1",
@@ -71,7 +71,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "esbuild": "^0.18.0"
+    "esbuild": "^0.19.0"
   },
   "engines": {
     "node": ">=12.0"
