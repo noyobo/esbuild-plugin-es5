@@ -1,6 +1,6 @@
 {
   "name": "esbuild-plugin-es5",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Use the @swc/core transform to convert to ES5 for the esbuild plugin.",
   "keywords": [
     "esbuild-plugin",
