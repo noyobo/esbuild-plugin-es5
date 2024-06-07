@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.1.1 (2024-06-07)
+
+
+### Bug Fixes
+
+* support jsx files ([#36](https://github.com/noyobo/esbuild-plugin-es5/issues/36)) ([4428422](https://github.com/noyobo/esbuild-plugin-es5/commit/4428422739c6d92c836cb8bf0de842eb544f8771)), closes [#35](https://github.com/noyobo/esbuild-plugin-es5/issues/35)
+
 ## 2.1.0 (2023-12-11)
 
 
