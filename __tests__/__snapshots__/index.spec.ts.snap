@@ -45,3 +45,24 @@ root.render(/* @__PURE__ */ _react.default.createElement(App, null));
 //# sourceMappingURL=index.js.map
 "
 `;
+
+exports[`index esbuild-plugin-es5 react-jsx 1`] = `
+""use strict";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _interop_require_default = require("@swc/helpers/_/_interop_require_default");
+var _react = /* @__PURE__ */ _interop_require_default._(require("react"));
+var _client = require("react-dom/client");
+require("./index.css");
+var App = function() {
+  console.warn("Hello World");
+  return /* @__PURE__ */ _react.default.createElement("div", null, "Hello World");
+};
+var div = document.createElement("div");
+document.body.appendChild(div);
+var root = (0, _client.createRoot)(div);
+root.render(/* @__PURE__ */ _react.default.createElement(App, null));
+//# sourceMappingURL=index.js.map
+"
+`;
