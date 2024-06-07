@@ -13,7 +13,7 @@ export function transformFile(file: string, options?: SWCOptions) {
   const isReact = file.endsWith('.jsx') || file.endsWith('.tsx');
   let transformOptions: SWCOptions = {
     jsc: {
-      parser: { syntax: isTs ? 'typescript' : 'ecmascript', tsx: isReact },
+      parser: { syntax: isTs ? 'typescript' : 'ecmascript', tsx: isReact && isTs, jsx: isReact && !isTs },
       target: 'es5',
       /**
        * Use external helpers to avoid duplicate helpers in the output.

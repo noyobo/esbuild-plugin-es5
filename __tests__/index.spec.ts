@@ -86,6 +86,14 @@ describe('index', () => {
       });
     });
 
+    it('react-jsx', async () => {
+      await createBuild(['./fixtures/react-jsx/index.jsx'], {
+        module: {
+          type: 'commonjs',
+        },
+      });
+    });
+
     it('async', async () => {
       await createBuild(['./fixtures/async/index.ts']);
     });
