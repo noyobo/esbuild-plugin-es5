@@ -18,10 +18,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Prettier Bot
-        uses: noyobo/prettier-bot@dev
+        uses: noyobo/prettier-bot@v1
