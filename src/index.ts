@@ -10,7 +10,7 @@ import { convertError } from './convertError';
 
 export function transformFile(file: string, options?: SWCOptions) {
   const isTs = file.endsWith('.ts') || file.endsWith('.tsx');
-  const isReact = file.endsWith('.jsx') || file.endsWith('.tsx');
+  const isReact = file.endsWith('.jsx') || file.endsWith('.tsx')
   let transformOptions: SWCOptions = {
     jsc: {
       parser: { syntax: isTs ? 'typescript' : 'ecmascript', tsx: isReact && isTs, jsx: isReact && !isTs },
