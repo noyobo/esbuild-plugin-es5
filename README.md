@@ -70,8 +70,8 @@ const es5Plugin= (options: { filter?: RegExp; swc?: SWCOptions }) => Es5Plugin
 SWC Options : https://swc.rs/docs/configuration/compilation
 
 
-[build-img]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/release.yml
+[build-img]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/ci.yml/badge.svg
+[build-url]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/ci.yml
 [downloads-img]:https://img.shields.io/npm/dt/esbuild-plugin-es5
 [downloads-url]:https://www.npmtrends.com/esbuild-plugin-es5
 [npm-img]:https://img.shields.io/npm/v/esbuild-plugin-es5
