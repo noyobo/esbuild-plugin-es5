@@ -2,7 +2,7 @@ name: prettier-check
 
 on:
   pull_request: # Must run on pull requests
-    - types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: read
