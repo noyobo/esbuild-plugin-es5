@@ -116,8 +116,7 @@ dist
 .pnp.*
 
 # Compiled code
-lib/
-esm/
+dist/
 
 .idea/
 

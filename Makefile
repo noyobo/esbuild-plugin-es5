@@ -15,7 +15,7 @@ demo/sucrase: | github/sucrase
 
 test-sucrase:  demo/sucrase
 	cd demo/sucrase && node ../../scripts/build.js all-tests.ts --bundle --platform=node --outfile=out.js && npx mocha out.js
-	cd demo/sucrase && node ../../scripts/build.js all-tests.ts --bundle --platform=node --minify --outfile=out.js && npx mocha out.js
+	cd demo/sucrase && node ../../scripts/build.js all-tests.ts --bundle --platform=node --minify --outfile=out.min.js && npx mocha out.min.js
 
 
 ################################################################################

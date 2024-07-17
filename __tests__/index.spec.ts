@@ -2,8 +2,9 @@ import esbuild, { BuildResult } from 'esbuild';
 import * as path from 'path';
 import * as fse from 'fs-extra';
 import { Options as SWCOptions } from '@swc/core';
+import { describe, it, expect } from 'vitest';
 
-import { es5Plugin } from '../src/index';
+import { es5Plugin } from '../src/index.ts';
 
 const writeFileSync = (file: string, data: string) => {
   fse.ensureFileSync(file);

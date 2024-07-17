@@ -19,7 +19,7 @@ Use the @swc/core transform to convert to ES5 for the esbuild plugin.
 
 ## Why?
 
-esbuild does not support exporting in ES5 mode, so when our code needs to run on older devices, 
+esbuild does not support exporting in ES5 mode [esbuild#297](https://github.com/evanw/esbuild/issues/297), so when our code needs to run on older devices, 
 it must be converted to ES5. This plugin uses @swc/core to convert non-ES5 syntax to ES5 before bundling.
 
 
@@ -70,8 +70,8 @@ const es5Plugin= (options: { filter?: RegExp; swc?: SWCOptions }) => Es5Plugin
 SWC Options : https://swc.rs/docs/configuration/compilation
 
 
-[build-img]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/release.yml
+[build-img]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/ci.yml/badge.svg
+[build-url]:https://github.com/noyobo/esbuild-plugin-es5/actions/workflows/ci.yml
 [downloads-img]:https://img.shields.io/npm/dt/esbuild-plugin-es5
 [downloads-url]:https://www.npmtrends.com/esbuild-plugin-es5
 [npm-img]:https://img.shields.io/npm/v/esbuild-plugin-es5

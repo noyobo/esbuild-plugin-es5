@@ -6,7 +6,7 @@
 import { OnLoadResult, Plugin } from 'esbuild';
 import { transformFile as _transformFile, Options as SWCOptions } from '@swc/core';
 import deepmerge from 'deepmerge';
-import { convertError } from './convertError';
+import { convertError } from './convertError.ts';
 
 export function transformFile(file: string, options?: SWCOptions) {
   const isTs = file.endsWith('.ts') || file.endsWith('.tsx');

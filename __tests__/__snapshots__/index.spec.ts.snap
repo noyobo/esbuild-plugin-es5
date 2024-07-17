@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`index esbuild-plugin-es5 async 1`] = `
+exports[`index > esbuild-plugin-es5 > async 1`] = `
 ""use strict";
 import { _ as _sliced_to_array } from "@swc/helpers/_/_sliced_to_array";
 import { foo } from "./foo";
@@ -16,7 +16,7 @@ Promise.all([
 "
 `;
 
-exports[`index esbuild-plugin-es5 basic 1`] = `
+exports[`index > esbuild-plugin-es5 > basic 1`] = `
 ""use strict";
 var a = 1;
 var b = "1 + 1";
@@ -25,7 +25,7 @@ console.log(a, b);
 "
 `;
 
-exports[`index esbuild-plugin-es5 react 1`] = `
+exports[`index > esbuild-plugin-es5 > react 1`] = `
 ""use strict";
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -46,7 +46,7 @@ root.render(/* @__PURE__ */ _react.default.createElement(App, null));
 "
 `;
 
-exports[`index esbuild-plugin-es5 react-jsx 1`] = `
+exports[`index > esbuild-plugin-es5 > react-jsx 1`] = `
 ""use strict";
 Object.defineProperty(exports, "__esModule", {
   value: true
