@@ -1,0 +1,22 @@
+name: prettier-check
+
+on:
+  pull_request: # Must run on pull requests
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  prettier-bot:
+    name: Prettier Bot
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prettier Bot
+        uses: noyobo/prettier-bot@v1
