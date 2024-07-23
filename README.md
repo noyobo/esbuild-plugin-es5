@@ -19,7 +19,7 @@ Use the @swc/core transform to convert to ES5 for the esbuild plugin.
 
 ## Why?
 
-esbuild does not support exporting in ES5 mode, so when our code needs to run on older devices, 
+esbuild does not support exporting in ES5 mode [esbuild#297](https://github.com/evanw/esbuild/issues/297), so when our code needs to run on older devices, 
 it must be converted to ES5. This plugin uses @swc/core to convert non-ES5 syntax to ES5 before bundling.
 
 
