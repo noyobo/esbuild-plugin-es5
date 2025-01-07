@@ -1,11 +1,14 @@
 name: npm-publish
 on:
-  release:
-    types:
-      - created
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Semantic version (major | minor | patch | premajor | preminor | prepatch | prerelease)'
+        default: 'patch'
+        required: true
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Checkout
@@ -21,7 +24,7 @@ jobs:
       - name: Test project
         run: pnpm test
       - name: Update version and generate release notes
-        run: npx standard-version
+        run: npx standard-version --release-as ${{ github.event.inputs.version }}
       - name: Publish to npm
         run: |
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
