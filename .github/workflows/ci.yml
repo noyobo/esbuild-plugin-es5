@@ -50,3 +50,8 @@ jobs:
 
       - name: Test sucrase
         run: make test-sucrase
+
+      - name: Benchmark
+        run: |
+          make demo-three-esbuild
+          make demo-three-esbuild-es5
