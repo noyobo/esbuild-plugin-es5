@@ -1,7 +1,7 @@
 const minimist = require('minimist');
 const esbuild = require('esbuild');
 const path = require('path');
-const { es5Plugin } = require('../lib');
+const { es5Plugin } = require('../dist/index');
 
 const args = minimist(process.argv.slice(2));
 
