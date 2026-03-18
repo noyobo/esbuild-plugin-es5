@@ -1,4 +1,4 @@
-# esbuild-build-es5
+# esbuild-plugin-es5
 
 Use the @swc/core transform to convert to ES5 for the esbuild plugin.
 
